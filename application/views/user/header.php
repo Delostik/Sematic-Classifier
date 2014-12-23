@@ -4,7 +4,11 @@
     <script type="text/javascript" src="<?=base_url()?>js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/plugins/jqplot.pieRenderer.min.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/plugins/jqplot.donutRenderer.min.js"></script>
+    <!--[if lt IE 9]>
     <script type="text/javascript" src="<?=base_url()?>js/excanvas.min.js"></script>
+    <![endif]-->
     <link type="text/css" rel="stylesheet" href="<?=base_url()?>css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="<?=base_url()?>css/jquery.jqplot.min.css" />
     <link type="text/css" rel="stylesheet" href="<?=base_url()?>css/pages.css" />
