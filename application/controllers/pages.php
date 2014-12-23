@@ -5,7 +5,7 @@ class Pages extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array());
+        $this->load->model(array('user_model'));
         $this->load->library(array('session'));
         $this->load->helper(array('url'));
         
@@ -57,26 +57,13 @@ class Pages extends CI_Controller {
         }
     }
     
-    public function getUid()
-    {
-        $result = $this->db->from('user')->order_by("uid DESC")->limit(1,0)->get()->result_array();
-        if (!$result) return 1;
-        return $result[0]['uid'] + 1;
-    }
-    
-    public function do_register()
+    public function do_regist()
     {
         $userName = $this->input->post('userName');
         $password = $this->input->post('password');
-    
-        $data = array(
-            'uid'       =>  $this->getUid(),
-            'userName'  =>  $userName,
-            'password'  =>  sha1($password),
-            'userType'  =>  1
-        );
-        $this->db->insert('user', $data);
+        $this->user_model->regist($userName, $password);
         header('Location:'. base_url(). 'login');
     }
+    
     
 }
