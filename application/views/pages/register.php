@@ -6,7 +6,7 @@
 			<p class="lead">　　能不能用还不知道……</p>
 		</div>
 		<div class="col-md-5">
-            <form action="user/do_register" method="post">
+            <form action="<?=base_url()?>do_register" method="post">
                 <style>
                     .form-control {
                         max-width: 280px;

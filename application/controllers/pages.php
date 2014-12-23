@@ -39,4 +39,44 @@ class Pages extends CI_Controller {
         $this->load->view('pages/footer');
     }
     
+    public function do_login()
+    {
+        $userName = $this->input->post('userName');
+        $password = $this->input->post('password');
+    
+        $query = $this->user_model->login($userName, $password);
+    
+        if ($query)
+        {
+            $this->session->set_userdata('uid', $query['uid']);
+            header('Location:'. base_url(). "user");
+        }
+        else
+        {
+            echo "False";
+        }
+    }
+    
+    public function getUid()
+    {
+        $result = $this->db->from('user')->order_by("uid DESC")->limit(1,0)->get()->result_array();
+        if (!$result) return 1;
+        return $result[0]['uid'] + 1;
+    }
+    
+    public function do_register()
+    {
+        $userName = $this->input->post('userName');
+        $password = $this->input->post('password');
+    
+        $data = array(
+            'uid'       =>  $this->getUid(),
+            'userName'  =>  $userName,
+            'password'  =>  sha1($password),
+            'userType'  =>  1
+        );
+        $this->db->insert('user', $data);
+        header('Location:'. base_url(). 'login');
+    }
+    
 }
