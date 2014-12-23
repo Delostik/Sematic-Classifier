@@ -6,7 +6,7 @@ class User_model extends CI_Model {
     {
         parent::__construct();
         $this->load->database();
-    }
+    } 
     
     public function login($userName, $password)
     {
@@ -39,6 +39,19 @@ class User_model extends CI_Model {
         return $result[0]['uid'] + 1;
     }
     
+    public function getUserInfoById($uid)
+    {
+        $query = $this->db->from('user')->where('uid', $uid)->get();
+        if ($query->num_rows)
+        {
+            $query = $query->result_array();
+            return $query[0];
+        }
+        else 
+        {
+            return null;
+        }
+    }
 
     
 }

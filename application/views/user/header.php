@@ -31,11 +31,20 @@
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-					<?php 
-
-					       echo    "<li><a href='login'>登陆</a></li>
-					                <li><a href='register'>注册</a></li>";
-					?>
+					<li class='dropdown'>
+	                   <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
+	                       <?=$userInfo['userName']?>
+		                   <span class='caret'></span>
+	                   </a>
+	                   <ul class='dropdown-menu' role='menu'>
+		                  <li class='dropdown-header'>controller</li>
+		                  <li><a href='#'>My account</a></li>
+  		                  <li><a href='#'>Security</a></li>
+  		                  <li><a href='#'>My mark</a></li>
+		                  <li class='divider'></li>
+		                  <li><a href='<?=base_url()?>user/logout'>Exit</a></li>
+	                   </ul>
+                    </li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>

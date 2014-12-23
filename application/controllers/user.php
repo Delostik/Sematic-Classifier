@@ -1,7 +1,9 @@
 <?php
 
-class Pages extends CI_Controller {
+class User extends CI_Controller {
 
+    private $userInfo;
+    
     public function __construct()
     {
         parent::__construct();
@@ -13,11 +15,23 @@ class Pages extends CI_Controller {
         {
             header('Location:'. base_url(). 'login\errNoLogin');
         }
+        
+        $this->userInfo = $this->user_model->getUserInfoById($this->session->userdata('uid'));
     }
     
     public function index()
     {
-        
+        $data['page'] = 'index';
+        $data['userInfo'] = $this->userInfo; 
+        $this->load->view('user/header', $data);
+        $this->load->view('user/index');
+        $this->load->view('user/footer');
+    }
+    
+    public function logout()
+    {
+        $this->session->unset_userdata('uid');
+        header('Location:'. base_url());
     }
     
 }
