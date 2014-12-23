@@ -38,7 +38,12 @@
 |
 */
 
-$route['default_controller'] = "pages/view";
+$route['user'] = 'user/index';
+$route['user/(:any)'] = 'user/$1';
+
+$route['(:any)'] = 'pages/$1';
+$route['default_controller'] = "pages/index";
+
 $route['404_override'] = '';
 
 
