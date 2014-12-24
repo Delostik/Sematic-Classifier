@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="<?=base_url()?>js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/jquery.jqplot.min.js"></script>
@@ -28,15 +29,11 @@
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li<?php echo ($page == 'index')? " class='active'": "";?>><a href="<?=base_url()?>">Project Index</a></li>
+					<li<?php echo ($page == 'index')? " class='active'": "";?>><a href="<?=base_url()?>user">Project Index</a></li>
+					<li<?php echo ($page == 'mark')? " class='active'": "";?>><a href="<?=base_url()?>user/marking">Go Marking</a></li>
+					<li<?php echo ($page == 'result')? " class='active'": "";?>><a href="<?=base_url()?>user/result">Current Result</a></li>
 					<li<?php echo ($page == '#')? " class='active'": "";?>><a href="<?=base_url()?>contact">Contact</a></li>
 				</ul>
-				<form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
                 <ul class="nav navbar-nav navbar-right">
 					<li class='dropdown'>
 	                   <a href='#' class='dropdown-toggle' data-toggle='dropdown'>

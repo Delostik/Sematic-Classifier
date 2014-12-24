@@ -2,8 +2,7 @@
 <script>
     $(document).ready(function() {
     	var data = [
-    	            ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14], 
-    	            ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+    	            ['Marked', 12],['Unmarked', 9], ['Processing', 14]
     	          ];
         $.jqplot ('chart', [data], { 
             seriesDefaults: {
@@ -23,7 +22,7 @@
 
 <div class="container minh">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">Percentage</div>
@@ -37,7 +36,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">Latest news</div>

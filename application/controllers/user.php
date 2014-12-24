@@ -34,4 +34,18 @@ class User extends CI_Controller {
         header('Location:'. base_url());
     }
     
+    public function marking()
+    {
+        $this->load->view('user/header', $data);
+        $this->load->view('user/marking');
+        $this->load->view('user/footer');
+    }
+    
+    public function result()
+    {
+        $this->load->view('user/header', $data);
+        $this->load->view('user/result');
+        $this->load->view('user/footer');
+    }
+    
 }
