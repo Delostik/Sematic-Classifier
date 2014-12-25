@@ -2,7 +2,7 @@
 <script>
     $(document).ready(function() {
     	var data = [
-    	            ['Marked', 12],['Unmarked', 9], ['Processing', 14]
+    	            ['Marked', <?=$overall['marked']?>],['Unmarked', <?=$overall['notyet']?>], ['Processing', <?=$overall['processing']?>]
     	          ];
         $.jqplot ('chart', [data], { 
             seriesDefaults: {

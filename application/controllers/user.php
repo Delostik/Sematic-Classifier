@@ -22,7 +22,8 @@ class User extends CI_Controller {
     public function index()
     {
         $data['page'] = 'index';
-        $data['userInfo'] = $this->userInfo; 
+        $data['userInfo'] = $this->userInfo;
+        $data['overall'] = $this->corpus_model->getOverall();
         $this->load->view('user/header', $data);
         $this->load->view('user/index');
         $this->load->view('user/footer');
