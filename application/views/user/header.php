@@ -30,7 +30,7 @@
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li<?php echo ($page == 'index')? " class='active'": "";?>><a href="<?=base_url()?>user">Project Index</a></li>
-					<li<?php echo ($page == 'mark')? " class='active'": "";?>><a href="<?=base_url()?>user/marking">Go Marking</a></li>
+					<li<?php echo ($page == 'marking')? " class='active'": "";?>><a href="<?=base_url()?>user/marking">Go Marking</a></li>
 					<li<?php echo ($page == 'result')? " class='active'": "";?>><a href="<?=base_url()?>user/result">Current Result</a></li>
 					<li<?php echo ($page == '#')? " class='active'": "";?>><a href="<?=base_url()?>contact">Contact</a></li>
 				</ul>

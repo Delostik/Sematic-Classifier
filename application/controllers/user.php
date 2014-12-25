@@ -36,6 +36,8 @@ class User extends CI_Controller {
     
     public function marking()
     {
+        $data['page'] = 'marking';
+        $data['userInfo'] = $this->userInfo;
         $this->load->view('user/header', $data);
         $this->load->view('user/marking');
         $this->load->view('user/footer');

@@ -28,10 +28,10 @@
                 <br />
                 <div class="btn-group btn-group-justified">
                     <div class="btn-group">
-                        <button type="button submit" class="btn btn-default">登陆</button>
+                        <button type="button submit" class="btn btn-default">Login</button>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default">忘记密码</button>
+                        <button type="button" class="btn btn-default">Forget</button>
                     </div>
                 </div>
 			</form>

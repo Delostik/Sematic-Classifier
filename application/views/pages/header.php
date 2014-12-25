@@ -33,8 +33,8 @@
                 <ul class="nav navbar-nav navbar-right">
 					<?php 
 
-					       echo    "<li><a href='login'>登陆</a></li>
-					                <li><a href='register'>注册</a></li>";
+					       echo    "<li><a href='login'>Login</a></li>
+					                <li><a href='register'>Regist</a></li>";
 					?>
 				</ul>
 			</div><!--/.nav-collapse -->
