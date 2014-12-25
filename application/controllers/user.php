@@ -7,7 +7,7 @@ class User extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('user_model'));
+        $this->load->model(array('user_model', 'corpus_model'));
         $this->load->library(array('session'));
         $this->load->helper(array('url'));
         
@@ -45,9 +45,42 @@ class User extends CI_Controller {
     
     public function result()
     {
+        $data['page'] = 'result';
+        $data['userInfo'] = $this->userInfo;
         $this->load->view('user/header', $data);
         $this->load->view('user/result');
         $this->load->view('user/footer');
+    }
+    
+    public function example()
+    {
+        if (!$this->user_model->isSuperUser($this->session->userdata('uid')))
+        {
+            header('Location:'.base_url(). 'error');
+        }
+        else
+        {
+            $data['page'] = 'example';
+            $data['userInfo'] = $this->userInfo;
+            $data['overall'] = $this->corpus_model->getOverall();
+            $this->load->view('user/header', $data);
+            $this->load->view('user/example');
+            $this->load->view('user/footer');
+        }
+    }
+    
+    public function do_addExample()
+    {
+        if (!$this->user_model->isSuperUser($this->session->userdata('uid')))
+        {
+            header('Location:'.base_url(). 'error');
+        }
+        else
+        {
+            $text = $this->input->post('text');
+            $this->corpus_model->addExample($text);
+            header('Location:'. base_url(). 'user/example');
+        }
     }
     
 }

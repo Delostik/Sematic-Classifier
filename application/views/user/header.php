@@ -32,6 +32,7 @@
 					<li<?php echo ($page == 'index')? " class='active'": "";?>><a href="<?=base_url()?>user">Project Index</a></li>
 					<li<?php echo ($page == 'marking')? " class='active'": "";?>><a href="<?=base_url()?>user/marking">Go Marking</a></li>
 					<li<?php echo ($page == 'result')? " class='active'": "";?>><a href="<?=base_url()?>user/result">Current Result</a></li>
+					<li<?php echo ($page == 'example')? " class='active'": "";?>><a href="<?=base_url()?>user/example">Examples</a></li>
 					<li<?php echo ($page == '#')? " class='active'": "";?>><a href="<?=base_url()?>contact">Contact</a></li>
 				</ul>
                 <ul class="nav navbar-nav navbar-right">

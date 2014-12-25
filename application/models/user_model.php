@@ -52,6 +52,11 @@ class User_model extends CI_Model {
             return null;
         }
     }
-
+    
+    public function isSuperUser($uid)
+    {
+        $query = $this->db->from('user')->where('uid', $uid)->get();
+        return $query->num_rows == 1;
+    }
     
 }
