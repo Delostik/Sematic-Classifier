@@ -27,3 +27,10 @@ create table result(
 create table superUser(
 	uid int
 )Type=InnoDB DEFAULT CHARSET=utf8;
+
+create table markRecord(
+	uid int,
+	eid int,
+	index(uid),
+	index(eid)
+)Type=InnoDB DEFAULT CHARSET=utf8;

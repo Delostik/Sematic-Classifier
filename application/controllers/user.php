@@ -39,6 +39,9 @@ class User extends CI_Controller {
     {
         $data['page'] = 'marking';
         $data['userInfo'] = $this->userInfo;
+        $data['example'] = $this->corpus_model->getMarkNeeded($this->session->userdata('uid'));
+        $data['sentences'] = $this->corpus_model->getSentenceByEid($data['example']['eid']);
+        
         $this->load->view('user/header', $data);
         $this->load->view('user/marking');
         $this->load->view('user/footer');
@@ -64,6 +67,7 @@ class User extends CI_Controller {
             $data['page'] = 'example';
             $data['userInfo'] = $this->userInfo;
             $data['overall'] = $this->corpus_model->getOverall();
+            
             $this->load->view('user/header', $data);
             $this->load->view('user/example');
             $this->load->view('user/footer');

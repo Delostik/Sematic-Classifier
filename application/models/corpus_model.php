@@ -8,7 +8,6 @@ class Corpus_model extends CI_Model {
         $this->load->database();
     }
     
-    // 这个未完成
     public function getOverall()
     {
         $data = array(
@@ -94,6 +93,26 @@ class Corpus_model extends CI_Model {
             $this->db->insert('result', $data);
             //print_r($data);
         }
+    }
+    
+    public function getMarkNeeded($uid)
+    {
+        $query = $this->db->from('example')->where('eid not in', "(select eid from markRecord where uid=". $uid. ")", false)->limit(1, 0)->order_by('marked', 'ASC')->get();
+        if ($query->num_rows)
+        {
+            $query = $query->result_array();
+            return $query[0];
+        }
+        else 
+        {
+            return null;
+        }
+    }
+    
+    public function getSentenceByEid($eid)
+    {
+        $query = $this->db->from('result')->where('eid', $eid)->order_by('rid', 'ASC')->get();
+        return $query->result_array();
     }
     
 }

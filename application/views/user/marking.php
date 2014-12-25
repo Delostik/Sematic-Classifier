@@ -8,7 +8,9 @@
                 <table class="table table-hover">
                     <tr>
                         <td> 
-                            <div id="chart" style="margin: 0 auto;"></div>
+                            <?php 
+                                echo $example['example'];
+                            ?>
                         </td>
                     </tr>
                 </table>
@@ -20,7 +22,17 @@
                 <div class="panel-heading">Marking Panel</div>
                 <!-- Table -->
                 <table class="table table-hover">
-                    
+                    <?php 
+                        foreach ($sentences as $row)
+                        {
+                            echo "<tr><td>". $row['content']. "</td></tr>";
+                            echo "<tr><td style='text-align:right'>
+                                        <button type='button' class='btn btn-success'>Subjective</button>
+                                        <button type='button' class='btn btn-info'>Neutral</button>
+                                        <button type='button' class='btn btn-warning'>Objective</button>
+                                  </td></tr>";
+                        }
+                    ?>
                 </table>
             </div>
         </div>
