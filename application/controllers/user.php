@@ -40,6 +40,16 @@ class User extends CI_Controller {
         $data['page'] = 'marking';
         $data['userInfo'] = $this->userInfo;
         $data['example'] = $this->corpus_model->getMarkNeeded($this->session->userdata('uid'));
+        
+        if (!$data['example'])
+        {
+            $data['errMsg'] = 'No more examples :)';
+            $this->load->view('user/header', $data);
+            $this->load->view('user/error');
+            $this->load->view('user/footer');
+            return;
+        }
+        
         $data['sentences'] = $this->corpus_model->getSentenceByEid($data['example']['eid']);
         
         $this->load->view('user/header', $data);
@@ -60,7 +70,7 @@ class User extends CI_Controller {
     {
         if (!$this->user_model->isSuperUser($this->session->userdata('uid')))
         {
-            header('Location:'.base_url(). 'error');
+            header('Location:'.base_url(). 'user/error');
         }
         else
         {
@@ -78,13 +88,30 @@ class User extends CI_Controller {
     {
         if (!$this->user_model->isSuperUser($this->session->userdata('uid')))
         {
-            header('Location:'.base_url(). 'error');
+            header('Location:'.base_url(). 'user/error');
         }
         else
         {
             $text = $this->input->post('text');
             $this->corpus_model->addExample($text);
             header('Location:'. base_url(). 'user/example');
+        }
+    }
+    
+    public function do_marking()
+    {
+        $data = $this->input->post('data');
+        $rid  = $this->input->post('rid');
+        $eid  = $this->input->post('eid');
+        $uid = $this->session->userdata('uid');
+        if (!$this->corpus_model->markedByUid($uid, $eid))
+        {
+            $this->corpus_model->mark($uid, $eid, $rid, $data);
+            echo "done";
+        }
+        else
+        {
+            echo 'already';
         }
     }
     

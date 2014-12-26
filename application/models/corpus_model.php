@@ -115,4 +115,43 @@ class Corpus_model extends CI_Model {
         return $query->result_array();
     }
     
+    private function addMark($rid, $stat)
+    {
+        switch ($stat)
+        {
+            case 'Subjective' : $this->db->set('subj', 'subj+1', false);
+                                break;
+            case 'Objective' : $this->db->set('obj', 'obj+1', false);
+                                break;
+            case 'Neutral'   : $this->db->set('neutral', 'neutral+1', false);
+        }
+        $this->db->where('rid', $rid)->update('result');
+        $this->db->flush_cache();
+        $query = $this->db->from('result')->where('rid', $rid)->get()->result_array();
+        $query = $query[0];
+        if ($query['subj']-$query['obj']>1 && $query['subj']-$query['neutral']>1) $query['res']=1;
+        else if ($query['neutral']-$query['obj']>1 && $query['neutral']-$query['subj']>1) $query['res']=2;
+        else if ($query['obj']-$query['subj']>1 && $query['obj']-$query['neutral']>1) $query['res']=3;
+        $this->db->flush_cache();
+        $this->db->where('rid', $rid)->update('result', $query);
+    }
+    
+    public function mark($uid, $eid, $rid, $data)
+    {
+        for ($i = 0; $i < count($data); $i++)
+        {
+            $this->addMark($rid + $i, $data[$i]);
+        }
+        $data = array(
+            'uid'   => $uid,
+            'eid'   => $eid
+        );
+        $this->db->insert('markRecord', $data);
+    }
+    
+    public function markedByUid($uid, $eid)
+    {
+        $query = $this->db->from('markRecord')->where('uid', $uid)->where('eid', $eid)->get();
+        return $query->num_rows > 0;
+    }
 }
