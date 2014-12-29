@@ -26,6 +26,27 @@ class Corpus_model extends CI_Model {
         return $data;
     }
     
+    public function getOverallDetail()
+    {
+        $data = array(
+            'all'       => 0,
+            'subj'      => 0,
+            'neutral'   => 0,
+            'obj'       => 0,
+            'unknow'    => 0
+        );
+        $data['all'] = $this->db->from('result')->count_all_results();
+        $this->db->flush_cache();
+        $data['subj'] = $this->db->from('result')->where('res', 1)->count_all_results();
+        $this->db->flush_cache();
+        $data['neutral'] = $this->db->from('result')->where('res', 2)->count_all_results();
+        $this->db->flush_cache();
+        $data['obj'] = $this->db->from('result')->where('res', 3)->count_all_results();
+        $this->db->flush_cache();
+        $data['unknow'] = $this->db->from('result')->where('res', 0)->count_all_results();
+        return $data;
+    }
+    
     public function getEid()
     {
         $query = $this->db->from('example')->limit(1, 0)->order_by('eid', 'DESC')->get();
@@ -153,5 +174,22 @@ class Corpus_model extends CI_Model {
     {
         $query = $this->db->from('markRecord')->where('uid', $uid)->where('eid', $eid)->get();
         return $query->num_rows > 0;
+    }
+    
+    public function getResult($type)
+    {
+        $data = array();
+        $this->db->from('result');
+        if ($type == 4)
+        {
+            $this->db->where('res', 0);
+        }
+        else if ($type)
+        {
+            $this->db->where('res', $type);
+        }
+        $query = $this->db->get();
+        $data = ($query->num_rows)? $query->result_array(): null;
+        return $data;
     }
 }

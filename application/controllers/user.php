@@ -57,10 +57,13 @@ class User extends CI_Controller {
         $this->load->view('user/footer');
     }
     
-    public function result()
+    public function result($type = 0)
     {
         $data['page'] = 'result';
-        $data['userInfo'] = $this->userInfo;
+        $data['userInfo'] = $this->userInfo; 
+        $data['result'] = $this->corpus_model->getResult($type);
+        $data['type'] = $type;
+        $data['overall'] = $this->corpus_model->getOverallDetail();
         $this->load->view('user/header', $data);
         $this->load->view('user/result');
         $this->load->view('user/footer');
