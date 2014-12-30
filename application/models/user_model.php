@@ -73,4 +73,22 @@ class User_model extends CI_Model {
         return $query->num_rows == 0;
     }
     
+    public function getUserContribution()
+    {
+        $query = $this->db->from('user')->get();
+        if ($query->num_rows)
+        {
+            $query = $query->result_array();
+            for ($i = 0; $i < count($query); $i++)
+            {
+                $query[$i]['contribution'] = $this->db->from('markRecord')->where('uid', $query[$i]['uid'])->count_all_results();
+            }
+            return $query;
+        }   
+        else
+        {
+            return null;
+        }
+    }
+    
 }
