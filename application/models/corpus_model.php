@@ -159,13 +159,25 @@ class Corpus_model extends CI_Model {
     
     public function mark($uid, $eid, $rid, $data)
     {
+        $statStr = '';
         for ($i = 0; $i < count($data); $i++)
         {
             $this->addMark($rid + $i, $data[$i]);
+            switch ($data[$i])
+            {
+                case 'Subjective' : $statStr .= '1';
+                                    break;
+                case 'Objective' : $statStr .= '3';
+                                    break;
+                case 'Neutral'   : $statStr .= '2';
+            }
         }
+        date_default_timezone_set('Asia/Shanghai');
         $data = array(
             'uid'   => $uid,
-            'eid'   => $eid
+            'eid'   => $eid,
+            'stat'  => $statStr,
+            'time'  => date('Y-m-d H:i:s')
         );
         $this->db->insert('markRecord', $data);
     }

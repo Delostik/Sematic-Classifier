@@ -44,9 +44,8 @@
 	                   </a>
 	                   <ul class='dropdown-menu' role='menu'>
 		                  <li class='dropdown-header'>controller</li>
-		                  <li><a href='#'>My account</a></li>
-  		                  <li><a href='#'>Security</a></li>
-  		                  <li><a href='#'>My mark</a></li>
+		                  <li><a href='<?=base_url()?>user/account'>My account</a></li>
+  		                  <li><a href='<?=base_url()?>user/mymark'>My mark</a></li>
 		                  <li class='divider'></li>
 		                  <li><a href='<?=base_url()?>user/logout'>Exit</a></li>
 	                   </ul>

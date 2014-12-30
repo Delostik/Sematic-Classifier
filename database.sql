@@ -28,6 +28,8 @@ create table superUser(
 create table markRecord(
 	uid int,
 	eid int,
+	stat text,
+	time datetime,
 	index(uid),
 	index(eid)
 )Type=InnoDB DEFAULT CHARSET=utf8;

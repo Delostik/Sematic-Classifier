@@ -136,7 +136,9 @@ class User extends CI_Controller {
     {
         $data['page'] = 'userlist';
         $data['userInfo'] = $this->userInfo;
-        $data['super'] = $this->user_model->isSuperUser($this->session->userdata('uid'));
+        
+        // 暂时不引入超级权限管理
+        // $data['super'] = $this->user_model->isSuperUser($this->session->userdata('uid'));
         
         $data['users'] = $this->user_model->getUserContribution();
         
@@ -144,5 +146,30 @@ class User extends CI_Controller {
         $this->load->view('user/userlist', $data);
         $this->load->view('user/footer');
     }
+    
+    public function account()
+    {
+        $data['page'] = 'account';
+        $data['userInfo'] = $this->userInfo;
+        
+        //$data['markRecord'] = $this->user_model->getMarkRecordByUid($this->session->userdata('uid'));
+        
+        $this->load->view('user/header', $data);
+        $this->load->view('user/account', $data);
+        $this->load->view('user/footer');
+    }
+    
+    public function mymark()
+    {
+        $data['page'] = 'account';
+        $data['userInfo'] = $this->userInfo;
+        
+        $data['markRecord'] = $this->user_model->getMarkRecordByUid($this->session->userdata('uid'));
+        
+        $this->load->view('user/header', $data);
+        $this->load->view('user/mymark', $data);
+        $this->load->view('user/footer');
+    }
+    
     
 }

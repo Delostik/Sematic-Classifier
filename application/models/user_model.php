@@ -91,4 +91,28 @@ class User_model extends CI_Model {
         }
     }
     
+    private function getSummaryContentByEid($eid, $len)
+    {
+        $query = $this->db->from('example')->where('eid', $eid)->get()->result_array();
+        return mb_substr($query[0]['example'], 0, $len);
+    }
+    
+    public function getMarkRecordByUid($uid)
+    {
+        $query = $this->db->from('markRecord')->where('uid', $uid)->order_by('time', 'DESC')->get();
+        if ($query->num_rows)
+        {
+            $query = $query->result_array();
+            for ($i = 0; $i < count($query); $i++)
+            {
+                $query[$i]['content'] = $this->getSummaryContentByEid($query[$i]['eid'], 100);
+            }
+            return $query;
+        }    
+        else
+        {
+            return null;
+        }
+    }
+    
 }
