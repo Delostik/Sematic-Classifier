@@ -26,6 +26,12 @@
                     <input type="password" class="form-control" placeholder="password" name="password">
                 </div>
                 <br />
+                <?php 
+                    if ($errMsg)
+                    {
+                        echo "<div class='alert alert-danger btn-group-justified' role='alert'>". $errMsg. "</div>";
+                    }
+                ?>
                 <div class="btn-group btn-group-justified">
                     <div class="btn-group">
                         <button type="button submit" class="btn btn-default">Login</button>

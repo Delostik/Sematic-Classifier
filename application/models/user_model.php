@@ -27,7 +27,8 @@ class User_model extends CI_Model {
         $data = array(
             'uid'       =>  $this->getUid(),
             'userName'  =>  $userName,
-            'password'  =>  sha1($password)
+            'password'  =>  sha1($password),
+            'super'     =>  0
         );
         $this->db->insert('user', $data);
     }
@@ -57,6 +58,19 @@ class User_model extends CI_Model {
     {
         $query = $this->db->from('user')->where('uid', $uid)->get();
         return $query->num_rows == 1;
+    }
+    
+    public function checkCode($code)
+    {
+        $query = $this->db->from('system')->where('item', 'security_code')->get()->result_array();
+        $query = $query[0];
+        return ($query['val'] == $code);
+    }
+    
+    public function checkUsernameAvaliable($username)
+    {
+        $query = $this->db->from('user')->where('userName', $username)->get();
+        return $query->num_rows == 0;
     }
     
 }

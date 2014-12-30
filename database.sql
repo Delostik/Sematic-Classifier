@@ -4,9 +4,6 @@ create table user(
 	password char(64)
 )Type=InnoDB DEFAULT CHARSET=utf8;
 
-create table corpus(
-	
-	
 create table example(
 	eid int primary key,
 	example text,
@@ -34,3 +31,9 @@ create table markRecord(
 	index(uid),
 	index(eid)
 )Type=InnoDB DEFAULT CHARSET=utf8;
+
+create table system(
+	item char(50),
+	val text,
+	index(item)
+);

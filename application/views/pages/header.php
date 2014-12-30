@@ -24,17 +24,11 @@
 					<li<?php echo ($page == 'index')? " class='active'": "";?>><a href="<?=base_url()?>">Project Index</a></li>
 					<li<?php echo ($page == '#')? " class='active'": "";?>><a href="<?=base_url()?>contact">Contact</a></li>
 				</ul>
-				<form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
                 <ul class="nav navbar-nav navbar-right">
 					<?php 
 
-					       echo    "<li><a href='login'>Login</a></li>
-					                <li><a href='register'>Regist</a></li>";
+					       echo    "<li><a href='". base_url(). "login'>Login</a></li>
+					                <li><a href='". base_url(). "register'>Regist</a></li>";
 					?>
 				</ul>
 			</div><!--/.nav-collapse -->
