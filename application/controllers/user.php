@@ -73,7 +73,7 @@ class User extends CI_Controller {
     {
         if (!$this->user_model->isSuperUser($this->session->userdata('uid')))
         {
-            header('Location:'.base_url(). 'user/error');
+            header('Location:'.base_url(). 'user/error/deny');
         }
         else
         {
@@ -116,6 +116,20 @@ class User extends CI_Controller {
         {
             echo 'already';
         }
+    }
+    
+    public function error($type = '?')
+    {
+        $data['page'] = 'error';
+        $data['userInfo'] = $this->userInfo;
+        switch ($type)
+        {
+            case 'deny':    $data['errMsg'] = 'You have no permission to view this page.'; break;
+            default:        $data['errMsg'] = 'Unknow error. Please contant administrator.';
+        }
+        $this->load->view('user/header', $data);
+        $this->load->view('user/error', $data);
+        $this->load->view('user/footer');
     }
     
 }
