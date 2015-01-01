@@ -22,7 +22,7 @@
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li<?php echo ($page == 'index')? " class='active'": "";?>><a href="<?=base_url()?>">Project Index</a></li>
-					<li<?php echo ($page == '#')? " class='active'": "";?>><a href="<?=base_url()?>contact">Contact</a></li>
+					<li<?php echo ($page == '#')? " class='active'": "";?>><a href=mailto:delostik@126.com>Contact</a></li>
 				</ul>
                 <ul class="nav navbar-nav navbar-right">
 					<?php 

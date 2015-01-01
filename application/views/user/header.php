@@ -34,7 +34,7 @@
 					<li<?php echo ($page == 'result')? " class='active'": "";?>><a href="<?=base_url()?>user/result">Current Result</a></li>
 					<li<?php echo ($page == 'example')? " class='active'": "";?>><a href="<?=base_url()?>user/example">Examples</a></li>
 					<li<?php echo ($page == 'userlist')? " class='active'": "";?>><a href="<?=base_url()?>user/userlist">Users</a></li>
-					<li<?php echo ($page == '#')? " class='active'": "";?>><a href="<?=base_url()?>contact">Contact</a></li>
+					<li<?php echo ($page == '#')? " class='active'": "";?>><a href=mailto:delostik@126.com>Contact</a></li>
 				</ul>
                 <ul class="nav navbar-nav navbar-right">
 					<li class='dropdown'>
