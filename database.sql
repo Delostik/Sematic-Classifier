@@ -9,7 +9,8 @@ create table example(
 	example text,
 	comp int,
 	marked int,
-	hash char(64)
+	hash char(64),
+	index(hash)
 )Type=InnoDB DEFAULT CHARSET=utf8;
 
 create table result(
@@ -39,4 +40,4 @@ create table system(
 	item char(50),
 	val text,
 	index(item)
-);
+)Type=InnoDB DEFAULT CHARSET=utf8;;
