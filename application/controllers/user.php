@@ -9,7 +9,7 @@ class User extends CI_Controller {
         parent::__construct();
         $this->load->model(array('user_model', 'corpus_model'));
         $this->load->library(array('session'));
-        $this->load->helper(array('url'));
+        $this->load->helper(array('url', 'form'));
         
         if (!$this->session->userdata('uid'))
         {
@@ -125,10 +125,24 @@ class User extends CI_Controller {
         switch ($type)
         {
             case 'deny':    $data['errMsg'] = 'You have no permission to view this page.'; break;
+            case 'fileErr': $data['errMsg'] = 'Batch add file failed. Unknow file format.'; break;
             default:        $data['errMsg'] = 'Unknow error. Please contant administrator.';
         }
         $this->load->view('user/header', $data);
         $this->load->view('user/error', $data);
+        $this->load->view('user/footer');
+    }
+    
+    public function success($type = '?')
+    {
+        $data['page'] = 'error';
+        $data['userInfo'] = $this->userInfo;
+        switch ($type)
+        {
+            case 'fileOk':    $data['errMsg'] = 'Batch add successfully!'; break;
+        }
+        $this->load->view('user/header', $data);
+        $this->load->view('user/success', $data);
         $this->load->view('user/footer');
     }
     
@@ -171,5 +185,51 @@ class User extends CI_Controller {
         $this->load->view('user/footer');
     }
     
+    public function batch()
+    {
+        $config['upload_path'] = './tmp/';
+        $config['encrypt_name'] = true;
+        $config['overwrite'] = false;
+        $config['allowed_types'] = '*';
+        
+        $this->load->library('upload', $config);
+        
+        if ( !$this->upload->do_upload())
+        {
+            header('Location:'. base_url(). 'user/error/fileErr');
+            return;
+        }
+        else
+        {
+            $data = $this->upload->data();
+            $data = $this->process_batch($data['full_path']);
+             
+            header('Location:'. base_url(). 'user/success/fileOk');
+        }
+        
+    }
+    
+    private function process_batch($path)
+    {
+        $data = file($path);
+        $example = '';
+        foreach ($data as $line)
+        {
+            $line = rtrim($line);
+            if (strcmp($line, "**********EXAMPLE END**********") == 0)
+            {
+                $this->corpus_model->addExample($example);
+            }
+            else if (strcmp($line, '**********EXAMPLE START**********') == 0)
+            {
+                $example = '';
+            }
+            else
+            {
+                $example .= $line;
+            }
+        }
+        
+    }
     
 }
