@@ -8,6 +8,13 @@ class Corpus_model extends CI_Model {
         $this->load->database();
     }
     
+    private function trimall($str)
+    {
+        $qian=array(" ","　","\t","\n","\r");
+        $hou=array("","","","","");
+        return str_replace($qian, $hou, $str);
+    }
+    
     public function getOverall()
     {
         $data = array(
@@ -80,6 +87,10 @@ class Corpus_model extends CI_Model {
         //$arr = explode('.', str_replace(array('\n'), '.', $text));
         //$temp = explode('.', $text);
         $temp = explode('.', str_replace(array('\n', '?', '...', '!', '~', ':)'), '.', $text));
+        if (!$temp) 
+        {
+            return false;
+        }
         $arr = array();
         $j = 0;
         for ($i = 0; $i < count($temp); $i++)
@@ -89,12 +100,17 @@ class Corpus_model extends CI_Model {
                 $j = $j + 1;
             }
         }
+        if ($this->checkExampleExist($text))
+        {
+            return false;
+        }
         $eid = $this->getEid();
         $data = array(
             'eid'       => $eid,
             'example'   => $text,
             'comp'      => $j,
-            'marked'    => 0
+            'marked'    => 0,
+            'hash'      => md5($this->trimall($text))
         );
         $this->db->insert('example', $data);
         //print_r($data);
@@ -114,6 +130,14 @@ class Corpus_model extends CI_Model {
             $this->db->insert('result', $data);
             //print_r($data);
         }
+        return true;
+    }
+    
+    private function checkExampleExist($text)
+    {
+        $hash = md5($this->trimall($text));
+        $query = $this->db->from('example')->where('hash', $hash)->get()->num_rows;
+        return $query != 0;
     }
     
     public function getMarkNeeded($uid)

@@ -8,7 +8,8 @@ create table example(
 	eid int primary key,
 	example text,
 	comp int,
-	marked int
+	marked int,
+	hash char(64)
 )Type=InnoDB DEFAULT CHARSET=utf8;
 
 create table result(

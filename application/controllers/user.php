@@ -96,8 +96,16 @@ class User extends CI_Controller {
         else
         {
             $text = $this->input->post('text');
-            $this->corpus_model->addExample($text);
-            header('Location:'. base_url(). 'user/example');
+            if ($this->corpus_model->addExample($text))
+            {
+                header('Location:'. base_url(). 'user/success/addexample');
+                return;
+            }
+            else 
+            {
+                header('Location:'. base_url(). 'user/error/exist');
+                return;
+            }
         }
     }
     
@@ -126,7 +134,8 @@ class User extends CI_Controller {
         {
             case 'deny':    $data['errMsg'] = 'You have no permission to view this page.'; break;
             case 'fileErr': $data['errMsg'] = 'Batch add file failed. Unknow file format.'; break;
-            default:        $data['errMsg'] = 'Unknow error. Please contant administrator.';
+            case 'exist': $data['errMsg'] = 'This example already exists!'; break;
+            default:        $data['errMsg'] = 'Please login again.';
         }
         $this->load->view('user/header', $data);
         $this->load->view('user/error', $data);
@@ -140,6 +149,7 @@ class User extends CI_Controller {
         switch ($type)
         {
             case 'fileOk':    $data['errMsg'] = 'Batch add successfully!'; break;
+            case 'addexample':    $data['errMsg'] = 'Example added successfully!'; break;
         }
         $this->load->view('user/header', $data);
         $this->load->view('user/success', $data);
@@ -206,7 +216,6 @@ class User extends CI_Controller {
              
             header('Location:'. base_url(). 'user/success/fileOk');
         }
-        
     }
     
     private function process_batch($path)
