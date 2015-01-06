@@ -27,8 +27,7 @@ class User_model extends CI_Model {
         $data = array(
             'uid'       =>  $this->getUid(),
             'userName'  =>  $userName,
-            'password'  =>  sha1($password),
-            'super'     =>  0
+            'password'  =>  sha1($password)
         );
         $this->db->insert('user', $data);
     }
