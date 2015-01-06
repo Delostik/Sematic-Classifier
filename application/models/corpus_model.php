@@ -95,7 +95,7 @@ class Corpus_model extends CI_Model {
         $j = 0;
         for ($i = 0; $i < count($temp); $i++)
         {
-            if ($temp[$i] && strlen($temp[$i] > 3)) {
+            if ($temp[$i] && strlen($temp[$i]) > 3) {
                 $arr[$j] = $temp[$i];
                 $j = $j + 1;
             }
