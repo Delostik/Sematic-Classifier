@@ -14,6 +14,7 @@ class User extends CI_Controller {
         if (!$this->session->userdata('uid'))
         {
             header('Location:'. base_url(). 'login\errNoLogin');
+            return;
         }
         
         $this->userInfo = $this->user_model->getUserInfoById($this->session->userdata('uid'));
@@ -96,6 +97,8 @@ class User extends CI_Controller {
         else
         {
             $text = $this->input->post('text');
+            $text = str_replace('**********EXAMPLE END**********', '', $text);
+            $text = str_replace('**********EXAMPLE START**********', '', $text);
             if ($this->corpus_model->addExample($text))
             {
                 header('Location:'. base_url(). 'user/success/addexample');
@@ -199,7 +202,7 @@ class User extends CI_Controller {
     {
         $config['upload_path'] = './tmp/';
         $config['encrypt_name'] = true;
-        $config['overwrite'] = false;
+        $config['overwrite'] = true;
         $config['allowed_types'] = '*';
         
         $this->load->library('upload', $config);
@@ -220,14 +223,16 @@ class User extends CI_Controller {
     
     private function process_batch($path)
     {
+        $cnt = 0;
         $data = file($path);
         $example = '';
         foreach ($data as $line)
         {
+            if ($cnt >= 220) break;
             $line = rtrim($line);
             if (strcmp($line, "**********EXAMPLE END**********") == 0)
             {
-                $this->corpus_model->addExample($example);
+                $cnt += $this->corpus_model->addExample($example);
             }
             else if (strcmp($line, '**********EXAMPLE START**********') == 0)
             {

@@ -3,14 +3,14 @@
     $(document).ready(function (){
         $(".btn").click(function() {
             if (!$($(this).siblings('td .btn')[0]).attr('disabled')) {
-         	   $(this).siblings('td .btn').attr('disabled', 'disabled').attr('class', 'btn btn-sm btn-defaulth');
+         	   $(this).siblings('td .btn').attr('disabled', 'disabled').attr('class', 'btn btn-sm btn-default');
          	   res[$(this).attr('id')] = $(this).text();
             }
             else {
             	child = $(this).parent().children();
             	$(child[0]).removeAttr('disabled').attr('class', 'btn btn-sm btn-success');
-            	$(child[1]).removeAttr('disabled').attr('class', 'btn btn-sm btn-warning');
-            	$(child[2]).removeAttr('disabled').attr('class', 'btn btn-sm btn-danger');
+            	//$(child[1]).removeAttr('disabled').attr('class', 'btn btn-sm btn-warning');
+            	$(child[1]).removeAttr('disabled').attr('class', 'btn btn-sm btn-danger');
             	res[$(this).attr('id')] = '';
             }
             console.log(res);
@@ -78,9 +78,9 @@
                         {
                             echo "<tr><td style='font-size: 18px'>". $row['content']. "</td></tr>";
                             echo "<tr><td style='text-align:right'>
-                                        <button type='button' class='btn btn-sm btn-success' id=". $id. ">Subjective</button>
-                                        <button type='button' class='btn btn-sm btn-warning' id=". $id. ">Neutral</button>
-                                        <button type='button' class='btn btn-sm btn-danger' id=". $id. ">Objective</button>
+                                        <button type='button' class='btn btn-sm btn-success' id=". $id. ">Subjective</button>".
+                                        //<button type='button' class='btn btn-sm btn-warning' id=". $id. ">Neutral</button>
+                                        "　<button type='button' class='btn btn-sm btn-danger' id=". $id. ">Objective</button>
                                   </td></tr>";
                             $id = $id + 1;
                         }

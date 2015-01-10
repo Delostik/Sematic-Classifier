@@ -10,6 +10,11 @@ create table example(
 	comp int,
 	marked int,
 	hash char(64),
+	type text,
+	author text,
+	time text,
+	helpful char(10),
+	star int,
 	index(hash)
 )Type=InnoDB DEFAULT CHARSET=utf8;
 

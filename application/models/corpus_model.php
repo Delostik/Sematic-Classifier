@@ -86,6 +86,13 @@ class Corpus_model extends CI_Model {
     {
         //$arr = explode('.', str_replace(array('\n'), '.', $text));
         //$temp = explode('.', $text);
+        if (strstr($text, "<script>")) {
+            return false;
+        }
+        
+        $info = explode(' |@| ', $text);
+        $text = $info[4];
+        
         $temp = explode('.', str_replace(array('\n', '?', '...', '!', '~', ':)'), '.', $text));
         if (!$temp) 
         {
@@ -110,7 +117,12 @@ class Corpus_model extends CI_Model {
             'example'   => $text,
             'comp'      => $j,
             'marked'    => 0,
-            'hash'      => md5($this->trimall($text))
+            'hash'      => md5($this->trimall($text)),
+            'type'      => 'laptop',
+            'author'    => $this->trimall($info[0]),
+            'time'      => $info[1],
+            'helpful'   => $info[2],
+            'star'      => $info[3]
         );
         $this->db->insert('example', $data);
         //print_r($data);
@@ -130,7 +142,7 @@ class Corpus_model extends CI_Model {
             $this->db->insert('result', $data);
             //print_r($data);
         }
-        return true;
+        return $j;
     }
     
     private function checkExampleExist($text)
@@ -174,9 +186,12 @@ class Corpus_model extends CI_Model {
         $this->db->flush_cache();
         $query = $this->db->from('result')->where('rid', $rid)->get()->result_array();
         $query = $query[0];
-        if ($query['subj']-$query['obj']>1 && $query['subj']-$query['neutral']>1) $query['res']=1;
-        else if ($query['neutral']-$query['obj']>1 && $query['neutral']-$query['subj']>1) $query['res']=2;
-        else if ($query['obj']-$query['subj']>1 && $query['obj']-$query['neutral']>1) $query['res']=3;
+        if ($query['subj'] + $query['obj'] > 2) 
+        {
+            if ($query['subj'] > $query['obj']) $query['res'] = 1;
+            else $query['res'] = 3;
+        }
+        
         $this->db->flush_cache();
         $this->db->where('rid', $rid)->update('result', $query);
     }

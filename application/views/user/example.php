@@ -7,7 +7,7 @@
 
 <div class='container minh'>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">Overview</div>
@@ -24,7 +24,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">Add Examples</div>
