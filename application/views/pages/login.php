@@ -3,7 +3,7 @@
     <div class="row featurette">
 	   <div class="col-md-7">
 			<h2 class="featurette-heading">Online Sematic Classifier</h2>
-			<p class="lead">　　能不能用还不知道……</p>
+			<p class="lead">　　Manual semantic classifier system.</p>
 		</div>
 		<div class="col-md-5">
             <form action="<?=base_url()?>do_login" method="post">

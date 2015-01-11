@@ -83,7 +83,8 @@ class User_model extends CI_Model {
                 $query[$i]['contribution'] = $this->db->from('markRecord')->where('uid', $query[$i]['uid'])->count_all_results();
             }
             return $query;
-        }   
+        }
+     
         else
         {
             return null;

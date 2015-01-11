@@ -60,6 +60,12 @@ class User extends CI_Controller {
     
     public function result($type = 0)
     {
+        if (!$this->user_model->isSuperUser($this->session->userdata('uid')))
+        {
+            header('Location:'.base_url(). 'user/error/deny');
+            return;
+        }
+        
         $data['page'] = 'result';
         $data['userInfo'] = $this->userInfo; 
         $data['result'] = $this->corpus_model->getResult($type);
