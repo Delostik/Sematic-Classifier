@@ -9,8 +9,8 @@
             else {
             	child = $(this).parent().children();
             	$(child[0]).removeAttr('disabled').attr('class', 'btn btn-sm btn-success');
-            	//$(child[1]).removeAttr('disabled').attr('class', 'btn btn-sm btn-warning');
-            	$(child[1]).removeAttr('disabled').attr('class', 'btn btn-sm btn-danger');
+            	$(child[1]).removeAttr('disabled').attr('class', 'btn btn-sm btn-warning');
+            	$(child[2]).removeAttr('disabled').attr('class', 'btn btn-sm btn-danger');
             	res[$(this).attr('id')] = '';
             }
             console.log(res);
@@ -24,7 +24,7 @@
                     return;
                 }
         	$.ajax({
-        		url: '<?=base_url()?>user/do_marking',
+        		url: '<?=base_url()?>user/do_marking/' + new Date().getTime(),
         		type: 'POST',
         		data: {'data': res, 'rid': <?=$sentences[0]['rid']?>, 'eid': <?=$example['eid']?>},
         		dataType: 'text',
@@ -59,6 +59,8 @@
                     <tr>
                         <td> 
                             <?php 
+                                $example = str_replace("<a>", "", $example);
+                                $example = str_replace("</a>", "", $example);
                                 echo $example['example'];
                             ?>
                         </td>
@@ -78,9 +80,9 @@
                         {
                             echo "<tr><td style='font-size: 18px'>". $row['content']. "</td></tr>";
                             echo "<tr><td style='text-align:right'>
-                                        <button type='button' class='btn btn-sm btn-success' id=". $id. ">Subjective</button>".
-                                        //<button type='button' class='btn btn-sm btn-warning' id=". $id. ">Neutral</button>
-                                        "　<button type='button' class='btn btn-sm btn-danger' id=". $id. ">Objective</button>
+                                        <button type='button' class='btn btn-sm btn-success' id=". $id. ">Subjective</button>
+                                        <button type='button' class='btn btn-sm btn-warning' id=". $id. ">Mix</button>
+                                        <button type='button' class='btn btn-sm btn-danger' id=". $id. ">Objective</button>
                                   </td></tr>";
                             $id = $id + 1;
                         }
@@ -89,7 +91,7 @@
                 
             </div>
             <div style='text-align:right'>
-                <button type='button' class='btn btn-primary btn-lg' id='submit_btn'>Submit</button>
+                <button type='submit' class='btn btn-primary btn-lg' id='submit_btn'>Submit</button>
             </div>
         </div>
     </div>

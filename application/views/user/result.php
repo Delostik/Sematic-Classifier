@@ -5,13 +5,15 @@
                 <!-- Default panel contents -->
                 <div class="panel-heading">Example List</div>
                 <!-- Table -->
-                <table class="table table-hover">
+                <table class="table table-hover" style="word-break: break-word">
                     <?php 
                         if ($result)
                         {
                             foreach ($result as $row)
                             {
                                 echo    "<tr><td>".
+                                            $row['content'] = str_replace("<a>", "", $row['content']);
+                                            $row['content'] = str_replace("</a>", "", $row['content']);
                                             $row['content']. 
                                         "</td></tr>";
                             }
@@ -27,7 +29,7 @@
                 <a href="<?=base_url()?>user/result/1" class='list-group-item <?php echo ($type==1)?'active':'';?>' id="btn_addBook">
                     <span class="badge"><?=$overall['subj']?></span>Subjective</a>
                 <a href="<?=base_url()?>user/result/2" class='list-group-item <?php echo ($type==2)?'active':'';?>' id="btn_addBook">
-                    <span class="badge"><?=$overall['neutral']?></span>Neutral</a>
+                    <span class="badge"><?=$overall['neutral']?></span>Mix</a>
                 <a href="<?=base_url()?>user/result/3" class='list-group-item <?php echo ($type==3)?'active':'';?>' id="btn_addBook">
                     <span class="badge"><?=$overall['obj']?></span>Objective</a>
                 <a href="<?=base_url()?>user/result/4" class='list-group-item <?php echo ($type==4)?'active':'';?>' id="btn_addBook">

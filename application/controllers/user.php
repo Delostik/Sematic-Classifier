@@ -13,7 +13,7 @@ class User extends CI_Controller {
         
         if (!$this->session->userdata('uid'))
         {
-            header('Location:'. base_url(). 'login\errNoLogin');
+            header('Location:'. base_url(). 'login\2');
             return;
         }
         
@@ -40,6 +40,12 @@ class User extends CI_Controller {
     {
         $data['page'] = 'marking';
         $data['userInfo'] = $this->userInfo;
+        
+        if (!$this->session->userdata('uid')) {
+            header('Location:'. base_url(). 'login\2');
+            return;
+        }
+        
         $data['example'] = $this->corpus_model->getMarkNeeded($this->session->userdata('uid'));
         
         if (!$data['example'])
@@ -198,6 +204,8 @@ class User extends CI_Controller {
         $data['userInfo'] = $this->userInfo;
         
         $data['markRecord'] = $this->user_model->getMarkRecordByUid($this->session->userdata('uid'));
+        $data['contribution'] = $this->user_model->getUserContribution($data['userInfo']['uid']);
+        $data['contribution'] = $data['contribution'][0]['contribution'];
         
         $this->load->view('user/header', $data);
         $this->load->view('user/mymark', $data);

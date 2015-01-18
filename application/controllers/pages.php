@@ -35,6 +35,7 @@ class Pages extends CI_Controller {
             switch ($res)
             {
                 case 1: $data['errMsg'] = 'Wrong password!'; break;
+                case 2: $data['errMsg'] = 'Please login again!';break;
                 default: $data['errMsg'] = 'Unknown mistake!';
             }
         }

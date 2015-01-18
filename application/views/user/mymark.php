@@ -13,7 +13,7 @@
                 </style>
                 <table class="table table-hover" style="table-layout:fixed;">
                     <thead>
-                            <th width="70%" class='center'>Summary</th>   
+                            <th width="70%" class='center'>Summary (<?php echo $contribution?>)</th>   
                             <th width="30%" class='center'>Mark Date</th>
                     </thead>
                     <?php 

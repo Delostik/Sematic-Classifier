@@ -49,9 +49,10 @@
                                 <p>(2)You can imagine how much of a hassle and inconvenience this is as a student or even a working professional.</p>
                                 <p>(3)Google has an amazing suite of applications.</p>
                                 <p>(4)If it broke today, I would order a new one tomorrow.</p>
-                            <h4><strong>Objective sentence : 描述商品特征(例如物流、服务、屏显等)的客观语句，描述客观事实，不包含任何个人主观情感和意见。</strong></h4>
+                            <h4><strong>Objective sentence : 描述客观事实的语句，不包含评论者的主观意见或者情感。</strong></h4>
                                 <p>(1)The 3 times this has happened, the phone will not charge, will not turn on, and the battery is not removable so there's really nothing you can do about it until it decides to turn on.</p>
                                 <p>(2)The battery lasted longer than the Nexus.</p>
+                            <h4><strong>Mix sentence: 既包含评论者的主观意见或者情感，同时又包含客观事实描述</strong></h4>
                             <!-- <h4><strong>Neutral sentence : 与商品不相关的客观描述。</strong></h4>
                                 <p>(1)As a college student, that just happens.</p>
                                 <p>(2)I purchased this for my mom.</p>

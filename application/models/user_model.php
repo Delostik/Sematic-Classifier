@@ -72,16 +72,45 @@ class User_model extends CI_Model {
         return $query->num_rows == 0;
     }
     
-    public function getUserContribution()
+    public function getUserContribution($user = '')
     {
-        $query = $this->db->from('user')->get();
+        if (!$user)
+        {
+            $query = $this->db->from('user')->get();
+        }
+        else 
+        {
+            $query = $this->db->from('user')->where('uid', $user)->get();
+        }
         if ($query->num_rows)
         {
             $query = $query->result_array();
             for ($i = 0; $i < count($query); $i++)
             {
-                $query[$i]['contribution'] = $this->db->from('markRecord')->where('uid', $query[$i]['uid'])->count_all_results();
+                $query[$i]['contribution'] = 0;
+                $this->db->flush_cache();
+                $eids = $this->db->from('markRecord')->where('uid', $query[$i]['uid'])->get();
+                if ($eids->num_rows)
+                {
+                    $eids = $eids->result_array();
+                    foreach ($eids as $item)
+                    {
+                        $this->db->flush_cache();
+                        $comp = $this->db->from('example')->where('eid', $item['eid'])->get();
+                        $comp = $comp->result_array();
+                        $comp = $comp[0]['comp'];
+                        $query[$i]['contribution'] = $query[$i]['contribution'] + $comp;
+                    }
+                }
+                //$query[$i]['contribution'] = $this->db->from('markRecord')->where('uid', $query[$i]['uid'])->count_all_results();
             }
+            for ($i = 0; $i < count($query) - 1; $i++)
+                for ($j = $i + 1; $j < count($query); $j++)
+                    if ($query[$i]['contribution'] < $query[$j]['contribution']) {
+                        $temp = $query[$i];
+                        $query[$i] = $query[$j];
+                        $query[$j] = $temp;
+                    }
             return $query;
         }
      

@@ -180,7 +180,7 @@ class Corpus_model extends CI_Model {
                                 break;
             case 'Objective' : $this->db->set('obj', 'obj+1', false);
                                 break;
-            case 'Neutral'   : $this->db->set('neutral', 'neutral+1', false);
+            case 'Mix'   : $this->db->set('neutral', 'neutral+1', false);
         }
         $this->db->where('rid', $rid)->update('result');
         $this->db->flush_cache();
